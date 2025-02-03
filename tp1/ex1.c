@@ -1,5 +1,5 @@
 /* Fichier: ex1.c
-*
+* First factor decomposition
 * auteur: Pierre MOLY
 * Exercice 1
 */
