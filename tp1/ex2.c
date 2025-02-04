@@ -1,7 +1,7 @@
 /* Fichier: ex1.c
 * Énigme
 * auteur: Pierre MOLY
-* Exercice 1
+* Exercice 2
 */
 
 #include "ex2.h"
