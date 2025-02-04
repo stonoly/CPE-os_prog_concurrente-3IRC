@@ -1,4 +1,4 @@
-/* Fichier: ex1.c
+/* Fichier: ex2.c
 * Énigme
 * auteur: Pierre MOLY
 * Exercice 2
