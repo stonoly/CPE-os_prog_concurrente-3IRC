@@ -4,9 +4,7 @@
  * Exercice 3
  */
 
-#include <stdio.h>
-#include <math.h>
-#include <float.h>
+#include "ex3.h"
 
 float coefficient(float x1, float x2, float y1, float y2){
     return (x2 == x1) ? INFINITY : (y2 - y1) / (x2 - x1);
