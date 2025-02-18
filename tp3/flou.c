@@ -7,6 +7,45 @@
 void load_image(const char* filepath, unsigned char** image_data, size_t* width, size_t* height);
 void save_image(const char* filepath, unsigned char* image, size_t width, size_t height);
 
+struct pixel{
+	size_t x;
+	size_t y;
+};
+
+size_t what_index(struct pixel Pixel, size_t width){
+	return (Pixel.y * width + Pixel.x) * 3;
+}
+
+void pixels_around(size_t tab[9], struct pixel Pixel, size_t width){
+	size_t x = Pixel.x;
+	size_t y = Pixel.y;
+
+	struct pixel Pixel_copy;
+
+	Pixel_copy.x = x - 1;
+	Pixel_copy.y = y - 1;
+	tab[0] = what_index(Pixel_copy, width);
+
+	Pixel_copy.x = x;
+	Pixel_copy.y = y - 1;
+	tab[1] = what_index(Pixel_copy, width);
+
+	Pixel_copy.x = x + 1;
+	Pixel_copy.y = y - 1;
+	tab[2] = what_index(Pixel_copy, width);
+
+	Pixel_copy.x = x - 1;
+	Pixel_copy.y = y;
+	tab[3] = what_index(Pixel_copy, width);
+
+	Pixel_copy.x = x - 1;
+	Pixel_copy.y = y - 1;
+	tab[4] = what_index(Pixel_copy, width);
+
+}
+
+
+
 int main(void)
 {
 	unsigned char* image = NULL;
@@ -19,7 +58,26 @@ int main(void)
     load_image(filename, &image, &width, &height);
 	out_image = malloc((width*height*3) * sizeof(unsigned char));
 
-    //votre code ici
+	printf("Image width: %lu\n", width);
+	printf("Image height: %lu\n", height);
+
+	struct pixel Pixel1 = {200, 587};
+
+	
+
+	for (size_t x = 0; x < (width * height) * 3; x++){
+			out_image[x] = image[x];
+	}
+
+	size_t index = what_index(Pixel1, width);
+
+	size_t tab[9];
+
+
+	for (short i = 0; i < 3; i++){
+		out_image[index + i] = 0;
+	}
+
 
 	save_image(output_filename, out_image, width, height);
 	free(image);
