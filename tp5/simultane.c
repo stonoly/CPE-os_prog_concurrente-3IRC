@@ -1,7 +1,7 @@
 /* Fichier: simultane.c
 * Write the program (simultane.c) which corresponds exactly to the sequel to command : du -sh /usr/share & ls -l & ps
 * auteur: Pierre MOLY
-* Exercice 1
+* Exercice 1.1
 */
 
 #include "simultane.h"
