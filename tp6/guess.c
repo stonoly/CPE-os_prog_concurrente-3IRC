@@ -51,7 +51,7 @@ int main()
         char comparate_num;
 
         while (comparate_num != '='){
-            sleep(0.25);
+            sleep(1);
             printf("Ecriver un nombre: ");
             scanf("%d", &num_dad);
             write(tube_num[1], &num_dad, sizeof(int));
