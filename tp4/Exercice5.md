@@ -48,3 +48,69 @@ pour rendre le programme deterministe il faut ajouter ` wait(NULL)` à la ligne 
 4
 2
 ```
+
+- ___L’appel à fork() peut-il échouer ? Pourquoi ?___
+
+Fork() peut échouer principalement à cause des limitations du système (nombre de processus, mémoire insuffisante, restrictions administratives)
+
+- ## Cas n°2:
+```
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+int main(void) {
+    int i = 0;
+    for (i=0 ; i<4 ; i++)
+        if (fork())
+            break;
+    srand(getpid());
+    int delai = rand()%4;
+    sleep(delai);
+    printf("Je suis %c, j'ai dormi %d s\n",'A'+i,delai);
+    return 0;
+ }
+```
+- ___Donnez l’arbre des processus générés par ce
+programme___
+```
+P (i=0)
+│
+├── F1 (i=1)
+│   │
+│   ├── F2 (i=2)
+│   │   │
+│   │   ├── F3 (i=3)
+│   │   │   │
+│   │   │   ├── F4 (i=4)
+```
+
+- ___Ce programme est-il déterministe ?___
+
+Ce programme n'est pas deterministe.
+
+-___Sans modifier les lignes 1 à 12, modifiez ce programme pour qu’il produise un affichage dans l’ordre alphabétique inverse (EDCBA)___
+```
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <sys/wait.h>  // Ajout de l'en-tête pour wait()
+
+int main(void) {
+    int i = 0;
+    for (i = 0; i < 4; i++)
+        if (fork())
+            break;
+
+    srand(getpid());
+    int delai = rand() % 4;
+    sleep(delai);
+
+    // Attendre les processus enfants pour assurer l'ordre inverse
+    while (wait(NULL) > 0);
+
+    printf("Je suis %c, j'ai dormi %d s\n", 'A' + i, delai);
+    return 0;
+}
+```
+
