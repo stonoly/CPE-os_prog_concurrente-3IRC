@@ -9,5 +9,7 @@
 
 int main()
 {
+    sem_create(1, 1);
+    
     return 0;
 }
