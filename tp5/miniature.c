@@ -66,17 +66,8 @@ int main(int argc, char* argv[]){
         return 1;
     }
 
-
-
     pid_t fils = fork();
     if (fils == 0){
-
-        //char* exec_argv[4] = {"ls", "-l", argv[1], NULL};
-        //int error = execvp("ls", exec_argv);
-        //if (error == -1){
-        //    exit(-1);
-        //}
-
 
         list_directory_downsize(argv[1]);
         exit(0);
